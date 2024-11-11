@@ -49,14 +49,6 @@ public class Pedido {
         return estadoAtual.getNomeEstado();
     }
 
-    public String paga() {
-        if (estadoAtual instanceof Faturado) {
-            estadoAtual.proximaTransicao(this);
-        } else {
-            throw new IllegalStateException("Transição inválida");
-        }
-        return estadoAtual.getNomeEstado();
-    }
 
     public String arquiva() {
         if (estadoAtual instanceof Pago || estadoAtual instanceof Cancelado || estadoAtual instanceof Rejeitado || estadoAtual instanceof Faturado) {
@@ -82,6 +74,16 @@ public class Pedido {
     public String cancela() {
         negativaChamado = 1;
         if (estadoAtual instanceof Encomendado) {
+            estadoAtual.proximaTransicao(this);
+        } else {
+            throw new IllegalStateException("Transição inválida");
+        }
+        return estadoAtual.getNomeEstado();
+    }
+
+    public String paga() {
+        negativaChamado = 1;
+        if (estadoAtual instanceof Faturado) {
             estadoAtual.proximaTransicao(this);
         } else {
             throw new IllegalStateException("Transição inválida");

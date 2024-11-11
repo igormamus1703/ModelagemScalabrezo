@@ -21,10 +21,11 @@ public class TesteState {
         str = p1.entrega();
         System.out.println("p1-Estado : " + str); // Mostra "p1-Estado : Entregue"
 
+        // Realiza o Faturamento (transita para "Faturado")
         str = p1.fatura();
-        System.out.println("p1-Estado : " + str);
+        System.out.println("p1-Estado : " + str); // Mostra "p1-Estado : Faturado"
 
-        // Realiza o pagamento (transita para "Pago")
+        //Realiza o pagamento (transita para "Pago")
         str = p1.paga();
         System.out.println("p1-Estado : " + str); // Mostra "p1-Estado : Pago"
 
