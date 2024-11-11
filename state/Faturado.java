@@ -9,7 +9,11 @@ public class Faturado implements Estado {
 
     @Override
     public void proximaTransicao(Pedido pedido) {
-        pedido.setEstado(new Pago());
+        if (pedido.negativaChamado == 1){
+            pedido.setEstado(new Pago());
+        }else{
+            pedido.setEstado(new Arquivado());
+        }
     }
 }
 

@@ -2,6 +2,7 @@ package state;
 
 public class Pedido {
     private Estado estadoAtual;
+    public int negativaChamado = 0;
 
     public Pedido() {
         // O pedido começa no estado Solicitado
@@ -9,43 +10,86 @@ public class Pedido {
     }
 
     public String solicita() {
-        // Retorna o nome do estado atual
         return estadoAtual.getNomeEstado();
     }
 
     public String cotacao() {
-        // Transita para o próximo estado e retorna o nome do novo estado
-        estadoAtual.proximaTransicao(this);
+        if (estadoAtual instanceof Solicitado) {
+            estadoAtual.proximaTransicao(this);
+        } else {
+            throw new IllegalStateException("Transição inválida");
+        }
         return estadoAtual.getNomeEstado();
     }
 
     public String encomenda() {
-        // Transita para o próximo estado e retorna o nome do novo estado
-        estadoAtual.proximaTransicao(this);
+        if (estadoAtual instanceof Cotado) {
+            estadoAtual.proximaTransicao(this);
+        } else {
+            throw new IllegalStateException("Transição inválida");
+        }
         return estadoAtual.getNomeEstado();
     }
 
     public String entrega() {
-        // Transita para o próximo estado e retorna o nome do novo estado
-        estadoAtual.proximaTransicao(this);
+        if (estadoAtual instanceof Encomendado) {
+            estadoAtual.proximaTransicao(this);
+        } else {
+            throw new IllegalStateException("Transição inválida");
+        }
+        return estadoAtual.getNomeEstado();
+    }
+
+    public String fatura() {
+        if (estadoAtual instanceof Entregue) {
+            estadoAtual.proximaTransicao(this);
+        } else {
+            throw new IllegalStateException("Transição inválida");
+        }
         return estadoAtual.getNomeEstado();
     }
 
     public String paga() {
-        // Transita para o próximo estado e retorna o nome do novo estado
-        estadoAtual.proximaTransicao(this);
+        if (estadoAtual instanceof Faturado) {
+            estadoAtual.proximaTransicao(this);
+        } else {
+            throw new IllegalStateException("Transição inválida");
+        }
         return estadoAtual.getNomeEstado();
     }
 
     public String arquiva() {
-        // Transita para o próximo estado e retorna o nome do novo estado
-        estadoAtual.proximaTransicao(this);
+        if (estadoAtual instanceof Pago || estadoAtual instanceof Cancelado || estadoAtual instanceof Rejeitado || estadoAtual instanceof Faturado) {
+            estadoAtual.proximaTransicao(this);
+        } else {
+            throw new IllegalStateException("Transição inválida");
+        }
+        return estadoAtual.getNomeEstado();
+    }
+
+    //Estados de negação
+
+    public String rejeita() {
+        negativaChamado = 1;
+        if (estadoAtual instanceof Cotado) {
+            estadoAtual.proximaTransicao(this);
+        } else {
+            throw new IllegalStateException("Transição inválida");
+        }
+        return estadoAtual.getNomeEstado();
+    }
+
+    public String cancela() {
+        negativaChamado = 1;
+        if (estadoAtual instanceof Encomendado) {
+            estadoAtual.proximaTransicao(this);
+        } else {
+            throw new IllegalStateException("Transição inválida");
+        }
         return estadoAtual.getNomeEstado();
     }
 
     public void setEstado(Estado novoEstado) {
-        // Define o novo estado
         this.estadoAtual = novoEstado;
     }
 }
-

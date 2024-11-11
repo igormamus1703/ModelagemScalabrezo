@@ -9,7 +9,11 @@ public class Encomendado implements Estado {
 
     @Override
     public void proximaTransicao(Pedido pedido) {
-        pedido.setEstado(new Faturado());
+        if (pedido.negativaChamado == 1){
+            pedido.setEstado(new Cancelado());
+        }else{
+            pedido.setEstado(new Entregue());
+        }
     }
 }
 

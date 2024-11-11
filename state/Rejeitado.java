@@ -1,15 +1,14 @@
 package state;
 
-public class Fim implements Estado {
+public class Rejeitado implements Estado{
 
     @Override
     public String getNomeEstado() {
-        return "FIM";
+        return "Rejeitado";
     }
 
     @Override
     public void proximaTransicao(Pedido pedido) {
-        // Não faz nada, é o estado final
+        pedido.setEstado(new Arquivado());
     }
 }
-

@@ -1,10 +1,9 @@
 package state;
 
-public class Pago implements Estado {
-
+public class Cancelado implements Estado{
     @Override
     public String getNomeEstado() {
-        return "Pago";
+        return "Cancelado";
     }
 
     @Override
@@ -12,4 +11,3 @@ public class Pago implements Estado {
         pedido.setEstado(new Arquivado());
     }
 }
-

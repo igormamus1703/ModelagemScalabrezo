@@ -9,7 +9,11 @@ public class Cotado implements Estado {
 
     @Override
     public void proximaTransicao(Pedido pedido) {
-        pedido.setEstado(new Encomendado());
+        if (pedido.negativaChamado == 1){
+            pedido.setEstado(new Rejeitado());
+        }else{
+            pedido.setEstado(new Encomendado());
+        }
     }
 }
 

@@ -17,9 +17,12 @@ public class TesteState {
         str = p1.encomenda();
         System.out.println("p1-Estado : " + str); // Mostra "p1-Estado : Encomendado"
 
-        // Realiza a entrega (transita para "Faturado")
+        // Realiza a entrega (transita para "Entregue")
         str = p1.entrega();
-        System.out.println("p1-Estado : " + str); // Mostra "p1-Estado : Faturado"
+        System.out.println("p1-Estado : " + str); // Mostra "p1-Estado : Entregue"
+
+        str = p1.fatura();
+        System.out.println("p1-Estado : " + str);
 
         // Realiza o pagamento (transita para "Pago")
         str = p1.paga();
@@ -28,5 +31,6 @@ public class TesteState {
         // Arquiva o pedido (transita para "FIM")
         str = p1.arquiva();
         System.out.println("p1-Estado : " + str); // Mostra "p1-Estado : FIM"
+
     }
 }
