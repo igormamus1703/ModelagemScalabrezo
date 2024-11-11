@@ -29,7 +29,7 @@ public abstract class Elemento {
         }  
         
 	abstract public Elemento consultar(String nome) throws MyException;
-    abstract public boolean adicionar(Elemento d) throws MyException;
+        abstract public boolean adicionar(Elemento d) throws MyException;
 	abstract public Elemento excluir(String nm) throws MyException; 
 	public abstract void listar(int nivel);
 

@@ -12,7 +12,7 @@ public abstract class Folha extends Elemento {
         }
         
         @Override
-	public Elemento excluir(String nm) throws MyException {
+	    public Elemento excluir(String nm) throws MyException {
             throw (new MyException("Operacao não valida em Folha"));
         }
 
@@ -24,5 +24,7 @@ public abstract class Folha extends Elemento {
         @Override
         public void listar(int nivel){
                 tabular(nivel);
+
+            System.out.println(this.nome);
         }
 }
